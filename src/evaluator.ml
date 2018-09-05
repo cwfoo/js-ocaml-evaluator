@@ -1,5 +1,4 @@
-let () =
-  JsooTop.initialize ()
+let () = JsooTop.initialize ()
 
 let execute code =
   let code = Js.to_string code in
