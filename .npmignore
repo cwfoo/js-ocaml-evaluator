@@ -1,0 +1,6 @@
+# Ignore everything.
+*
+
+# Except:
+!_build/*
+!LICENSE-3RD-PARTY

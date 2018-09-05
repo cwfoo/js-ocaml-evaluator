@@ -1,0 +1,6 @@
+# List of OPAM packages needed for building.
+# This file is for reference only. It is not used by any code.
+
+js_of_ocaml
+js_of_ocaml-ppx
+js_of_ocaml-toplevel
