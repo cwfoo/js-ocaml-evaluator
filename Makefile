@@ -1,8 +1,6 @@
-SHELL := bash
-# Add local npm executables to PATH.
-export PATH := $(shell npm bin):$(PATH)
+export PATH := $(shell npm bin):$(PATH)  # Add local npm executables to PATH.
 
-.PHONY: build clean
+.PHONY: clean
 
 _build/evaluator.js: src/evaluator.ml
 	@mkdir -p _build/
@@ -15,16 +13,15 @@ _build/evaluator.js: src/evaluator.ml
 		-o _build/evaluator.byte
 	# Compile bytecode to JavaScript.
 	js_of_ocaml -o _build/evaluator.js \
-				--toplevel \
-				--dynlink \
-				+dynlink.js \
-				+toplevel.js \
-				_build/evaluator.byte
+		--toplevel \
+		--dynlink \
+		+dynlink.js \
+		+toplevel.js \
+		_build/evaluator.byte
 	rm -f _build/evaluator.byte
 	# Minify JavaScript file.
 	uglifyjs _build/evaluator.js --compress --mangle --output _build/evaluator.min.js
 	rm -f _build/evaluator.js
 
 clean:
-	rm -rf _build/
-	rm -f src/*.cm[io]
+	rm -rf _build/ src/*.cm[io]
