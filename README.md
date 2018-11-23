@@ -8,7 +8,10 @@ npm install --save js-ocaml-evaluator
 
 ## Usage
 
-This package exposes a single function: `execute`.
+This package exposes these functions:
+
+* `execute` - Execute OCaml code given as a string.
+* `setStdoutHandler` - Configure how data sent to stdout is handled.
 
 Usage in Node.js:
 
@@ -37,6 +40,16 @@ OCamlEval.execute('blabla;;');
 // Prints "File "", line 1, characters 0-6:
 //         Error: Syntax error" to the console.
 // Returns: ''
+
+// Customize the handling of data sent to stdout.
+OCamlEval.setStdoutHandler(function(str) {
+    process.stdout.write('This is stdout: ' + str);
+    // Note: `process.stdout.write` is specific to Node.js.
+    // We could have used `console.log`, but that adds a newline.
+});
+OCamlEval.execute('print_endline "Hello planet";;');
+// Prints "This is stdout: Hello planet" to the console.
+// Returns: '- : unit = ()\n'
 ```
 
 ## Development
