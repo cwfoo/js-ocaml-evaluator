@@ -1,8 +1,6 @@
 export PATH := $(shell npm bin):$(PATH)  # Add local npm executables to PATH.
 
-.PHONY: clean
-
-_build/evaluator.js: src/evaluator.ml
+_build/evaluator.min.js: src/evaluator.ml
 	@mkdir -p _build/
 	# Produce bytecode.
 	ocamlfind ocamlc src/evaluator.ml \
@@ -23,5 +21,6 @@ _build/evaluator.js: src/evaluator.ml
 	uglifyjs _build/evaluator.js --compress --mangle --output _build/evaluator.min.js
 	rm -f _build/evaluator.js
 
+.PHONY: clean
 clean:
 	rm -rf _build/ src/*.cm[io]
