@@ -12,6 +12,7 @@ This package exposes these functions:
 
 * `execute` - Execute OCaml code given as a string.
 * `setStdoutHandler` - Configure how data sent to stdout is handled.
+* `setStderrHandler` - Configure how data sent to stderr is handled.
 
 Usage in Node.js:
 

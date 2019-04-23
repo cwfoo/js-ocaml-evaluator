@@ -10,13 +10,20 @@ let execute (code : Js.js_string Js.t) : Js.js_string Js.t =
 (* Set the handler for stdout.
  * Every time data is sent to stdout, function f will be called with
  * one string argument: the data sent to stdout.
+ * WARN: The implementation below uses the undocumented
+ * Sys_js.set_channel_flusher function.
  * *)
 let set_stdout_handler (f : (string -> unit)) : unit =
     Sys_js.set_channel_flusher stdout f
+
+(* Set the handler for stderr. *)
+let set_stderr_handler (f : (string -> unit)) : unit =
+    Sys_js.set_channel_flusher stderr f
 
 let () =
   Js.export_all (
     object%js
       val execute = execute
       val setStdoutHandler = set_stdout_handler
+      val setStderrHandler = set_stderr_handler
     end)
